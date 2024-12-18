@@ -1,5 +1,6 @@
 #!/bin/bash
-
+shopt -s extglob
+declare -a links=()
 links=(
 https://huggingface.co/TencentARC/T2I-Adapter/resolve/main/models/coadapter-canny-sd15v1.pth
 https://huggingface.co/TencentARC/T2I-Adapter/resolve/main/models/coadapter-color-sd15v1.pth
@@ -29,6 +30,8 @@ https://huggingface.co/lllyasviel/ControlNet/resolve/main/models/control_sd15_sc
 https://huggingface.co/lllyasviel/ControlNet/resolve/main/models/control_sd15_seg.pth
 )
 
-for i in ${links[@]}; do
-    wget $i
+i=0
+while [[ $i < ${#links[@]} ]]; do
+    wget "${links[$i]}"
+    i=$((i+1))
 done
